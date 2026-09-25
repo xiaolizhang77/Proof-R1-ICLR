@@ -1,0 +1,31 @@
+model_name_or_path: ${MODEL_PATH}
+train_file: ${PROOF_R1_ROOT}/data/proverqa/warmup.jsonl
+output_dir: ${PROOF_R1_ROOT}/outputs/warmup/qwen3_8b
+thinking_mode: native
+seed: 44
+max_train_records: 56
+num_epochs: 2
+micro_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-05
+warmup_steps: 2
+weight_decay: 0.0
+max_grad_norm: 1.0
+max_length: 8192
+max_prompt_length: 4096
+max_response_length: 4096
+dtype: bfloat16
+device_map: auto
+gradient_checkpointing: true
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
